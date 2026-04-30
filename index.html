@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gift</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="scene" aria-label="Animated gift scene">
+      <div class="vignette"></div>
+
+      <button class="character-button" type="button" aria-label="Ubah ekspresi karakter" aria-pressed="false">
+        <img class="character" src="1.png" alt="Karakter pixel art" draggable="false" />
+      </button>
+
+      <section class="message" aria-label="Pesan">
+        <p id="lyricLine">Mr. Blue Melville was a sailor at dawn</p>
+      </section>
+
+      <audio id="song" src="walking-backhome.mp3" preload="auto" autoplay></audio>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
