@@ -120,12 +120,18 @@ function syncLyrics() {
 }
 
 function startSong() {
+  song.autoplay = true;
+  song.muted = false;
   song.volume = 1;
+  if (song.readyState === 0) {
+    song.load();
+  }
   song.play().catch(() => {});
 }
 
 song.addEventListener("timeupdate", syncLyrics);
 setLyric(0);
+startSong();
 document.addEventListener("DOMContentLoaded", startSong);
 window.addEventListener("load", startSong);
 document.addEventListener("pointerdown", startSong, { once: true });

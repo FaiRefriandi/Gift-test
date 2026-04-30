@@ -34,7 +34,18 @@ body {
   isolation: isolate;
   background:
     linear-gradient(90deg, rgba(8, 9, 16, 0.32) 0%, rgba(8, 9, 16, 0.06) 48%, rgba(8, 9, 16, 0.34) 100%),
-    url("bg.gif") center / cover no-repeat;
+    url("bg-poster.jpg") center / cover no-repeat;
+}
+
+.scene-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
 }
 
 .scene::before {
@@ -43,6 +54,7 @@ body {
   inset: 0;
   z-index: 1;
   background:
+    linear-gradient(90deg, rgba(8, 9, 16, 0.32) 0%, rgba(8, 9, 16, 0.06) 48%, rgba(8, 9, 16, 0.34) 100%),
     radial-gradient(circle at 22% 43%, rgba(255, 221, 247, 0.24), transparent 24%),
     linear-gradient(180deg, rgba(5, 9, 21, 0.16), rgba(3, 4, 9, 0.42));
   pointer-events: none;
@@ -178,6 +190,10 @@ body {
 }
 
 @media (max-width: 760px) {
+  :root {
+    --character-drop: clamp(30px, 7vh, 60px);
+  }
+
   body {
     overflow: hidden;
   }
@@ -189,9 +205,9 @@ body {
   }
 
   .character-button {
-    width: min(92vw, 420px);
+    width: min(102vw, 460px);
     min-width: 210px;
-    margin-left: clamp(-14px, -2vw, 8px);
+    margin-left: clamp(-30px, -4vw, -8px);
     grid-row: 1;
   }
 
@@ -229,8 +245,8 @@ body {
 
 @media (max-width: 430px) {
   .character-button {
-    width: min(96vw, 390px);
-    margin-left: -28px;
+    width: min(110vw, 440px);
+    margin-left: -34px;
   }
 
   .message {
