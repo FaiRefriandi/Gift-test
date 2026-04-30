@@ -3,6 +3,7 @@ const characterImage = document.querySelector(".character");
 const message = document.querySelector(".message");
 const lyricLine = document.querySelector("#lyricLine");
 const song = document.querySelector("#song");
+const sceneBackground = document.querySelector(".scene-bg");
 
 let isSmiling = false;
 const frames = {
@@ -29,6 +30,7 @@ const lyrics = [
 let currentLyricIndex = -1;
 const duplicateLyricHoldSeconds = 6;
 const mobileLyricQuery = window.matchMedia("(max-width: 760px)");
+let animatedBackgroundLoaded = false;
 
 function swapCharacter() {
   isSmiling = !isSmiling;
@@ -122,16 +124,36 @@ function syncLyrics() {
 function startSong() {
   song.autoplay = true;
   song.muted = false;
+  song.preload = "auto";
   song.volume = 1;
-  if (song.readyState === 0) {
-    song.load();
-  }
   song.play().catch(() => {});
 }
 
+function loadAnimatedBackground() {
+  if (animatedBackgroundLoaded || !sceneBackground?.dataset.src) {
+    return;
+  }
+
+  animatedBackgroundLoaded = true;
+  sceneBackground.src = sceneBackground.dataset.src;
+}
+
+song.load();
 song.addEventListener("timeupdate", syncLyrics);
+song.addEventListener("loadedmetadata", startSong);
+song.addEventListener("canplay", () => {
+  startSong();
+  loadAnimatedBackground();
+});
+song.addEventListener("canplaythrough", () => {
+  startSong();
+  loadAnimatedBackground();
+});
 setLyric(0);
 startSong();
 document.addEventListener("DOMContentLoaded", startSong);
-window.addEventListener("load", startSong);
+window.addEventListener("load", () => {
+  startSong();
+  window.setTimeout(loadAnimatedBackground, 900);
+});
 document.addEventListener("pointerdown", startSong, { once: true });
